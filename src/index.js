@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'; 
 import ReactDOM from 'react-dom';
 import './styles.css';
 import reportWebVitals from './reportWebVitals';
+import { render } from '@testing-library/react';
  
-class App extends React Component {
+class App extends React.Component {
   state = {
-    color: "blue"
+    color: "Blue"
   }
   onChangeHandler = e => {
     this.setState({
@@ -14,20 +15,29 @@ class App extends React Component {
   }
   render(){
     const styleObj = {
-      background = this.state.color
-    }
+      background: this.state.color
+    };
     return (
-      <div style={styleObj} className="App">
-        <input 
-          onChange={this.onChangeHandler}
-          value={this.state.color}
-          type="text" /> 
-      </div>
+      <div style={styleObj} className="container">
+          <div className= "ui card">
+            <div className="content">
+                <div className="header">
+                  Color: {this.state.color}
+                </div>
+                <div className="ui search">
+                 <input 
+                    className="prompt"
+                    onChange={this.onChangeHandler}
+                     value={this.state.color}
+                      type="text" /> 
+                    </div>
+               </div>
+          </div>
+        </div> 
     )
   }
 }
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+const rootElement = document.getElementById("root")
+ReactDOM.render(<App />, rootElement); 
